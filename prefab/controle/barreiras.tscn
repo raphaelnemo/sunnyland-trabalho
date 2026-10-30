@@ -1,0 +1,132 @@
+[gd_scene format=3 uid="uid://dv0655n3rx85m"]
+
+[ext_resource type="Script" uid="uid://bak8i8v03ac0c" path="res://prefab/controle/final.gd" id="1_1tawl"]
+[ext_resource type="Script" uid="uid://boj1hn8oh6bdw" path="res://prefab/controle/mensagens.gd" id="2_cy4uh"]
+[ext_resource type="Script" uid="uid://cdk234r1ahogh" path="res://prefab/controle/chao.gd" id="3_d6udq"]
+[ext_resource type="Texture2D" uid="uid://d3inn0asxct2u" path="res://assets/fases/Background/back.png" id="4_clddn"]
+[ext_resource type="Texture2D" uid="uid://bfy6bt02nkhhn" path="res://assets/fases/Background/middle.png" id="5_ro58d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxog5"]
+size = Vector2(17, 448)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oox5t"]
+size = Vector2(40, 192)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d6udq"]
+size = Vector2(1312, 20)
+
+[node name="barreiras" type="Control" unique_id=1709974451]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -176.0
+offset_right = 40.0
+offset_bottom = -136.0
+
+[node name="Referencia_tamanhoFase" type="ReferenceRect" parent="." unique_id=1584700567]
+layout_mode = 0
+offset_top = -16.0
+offset_right = 1280.0
+offset_bottom = 176.0
+
+[node name="ponta" type="StaticBody2D" parent="." unique_id=1968654256]
+position = Vector2(0, 176)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ponta" unique_id=56189616]
+position = Vector2(1288, -96)
+shape = SubResource("RectangleShape2D_yxog5")
+debug_color = Color(0.99709016, 0, 0.14907774, 0.41960785)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ponta" unique_id=1125550203]
+position = Vector2(-8, -96)
+shape = SubResource("RectangleShape2D_yxog5")
+debug_color = Color(0.99709016, 0, 0.14907774, 0.41960785)
+
+[node name="final" type="Area2D" parent="." unique_id=534398478]
+position = Vector2(1288, -8)
+script = ExtResource("1_1tawl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="final" unique_id=94517686]
+position = Vector2(-12, 88)
+shape = SubResource("RectangleShape2D_oox5t")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1252445013]
+script = ExtResource("2_cy4uh")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1912064851]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="ganhou" type="Label" parent="CanvasLayer" unique_id=997538215]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.0
+offset_top = -11.5
+offset_right = 69.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "Fase Completada!"
+
+[node name="morreu" type="Label" parent="CanvasLayer" unique_id=1021277614]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.0
+offset_top = -24.5
+offset_right = 69.0
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "Você morreu.
+Reiniciando."
+horizontal_alignment = 1
+
+[node name="chao" type="Area2D" parent="." unique_id=2111485084]
+position = Vector2(-8, 192)
+script = ExtResource("3_d6udq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="chao" unique_id=116074010]
+position = Vector2(648, 0)
+shape = SubResource("RectangleShape2D_d6udq")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1574271750]
+
+[node name="ParallaxLayerSky" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1230266101]
+position = Vector2(0, -8)
+motion_scale = Vector2(0.5, 0)
+motion_mirroring = Vector2(768, 0)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayerSky" unique_id=1707676530]
+offset_top = -24.0
+offset_right = 768.0
+offset_bottom = 216.0
+texture = ExtResource("4_clddn")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ParallaxLayerMiddle" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1691861007]
+position = Vector2(0, -64)
+motion_scale = Vector2(0.8, 0)
+motion_mirroring = Vector2(880, 0)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayerMiddle" unique_id=401964307]
+offset_top = 100.0
+offset_right = 880.0
+offset_bottom = 468.0
+texture = ExtResource("5_ro58d")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="body_entered" from="final" to="final" method="_on_body_entered"]
+[connection signal="body_entered" from="chao" to="chao" method="_on_body_entered"]

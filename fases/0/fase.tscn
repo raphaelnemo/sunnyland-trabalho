@@ -1,0 +1,128 @@
+[gd_scene format=3 uid="uid://cxjalw2rcoi05"]
+
+[ext_resource type="Script" uid="uid://dgjhwfu2aacuv" path="res://scripts/fase.gd" id="1_oawla"]
+[ext_resource type="Script" uid="uid://dtvjp6x7jv8xi" path="res://fases/0/seletor.gd" id="2_ity2t"]
+[ext_resource type="Texture2D" uid="uid://d3inn0asxct2u" path="res://assets/fases/Background/back.png" id="3_8vpl0"]
+
+[sub_resource type="SystemFont" id="SystemFont_kux1c"]
+font_names = PackedStringArray("Monospace")
+font_weight = 999
+subpixel_positioning = 0
+
+[sub_resource type="SystemFont" id="SystemFont_uscvu"]
+font_names = PackedStringArray("Monospace")
+font_weight = 999
+subpixel_positioning = 0
+
+[node name="seletorFase" type="Node2D" unique_id=1322182096]
+script = ExtResource("1_oawla")
+
+[node name="Menu" type="Control" parent="." unique_id=796739559]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_ity2t")
+
+[node name="fundo" type="TextureRect" parent="Menu" unique_id=509960944]
+layout_mode = 1
+offset_left = -48.0
+offset_right = 369.6
+offset_bottom = 256.0
+texture = ExtResource("3_8vpl0")
+expand_mode = 3
+
+[node name="caixapreta" type="TextureRect" parent="Menu/fundo" unique_id=828599339]
+modulate = Color(0, 0, 0, 0.6862745)
+layout_mode = 0
+offset_right = 417.6
+offset_bottom = 256.0
+texture = ExtResource("3_8vpl0")
+expand_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu" unique_id=1455699032]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 304.0
+offset_bottom = 130.0
+
+[node name="Label" type="Label" parent="Menu/VBoxContainer" unique_id=752383092]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Selecione uma fase"
+
+[node name="fases" type="HBoxContainer" parent="Menu/VBoxContainer" unique_id=1487928548]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+alignment = 1
+
+[node name="1" type="Button" parent="Menu/VBoxContainer/fases" unique_id=753269378]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_fonts/font = SubResource("SystemFont_kux1c")
+theme_override_font_sizes/font_size = 10
+text = "1"
+
+[node name="Button2" type="Button" parent="Menu/VBoxContainer/fases" unique_id=1280033592]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "2"
+
+[node name="Button3" type="Button" parent="Menu/VBoxContainer/fases" unique_id=1257287812]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "3"
+
+[node name="Button4" type="Button" parent="Menu/VBoxContainer/fases" unique_id=9691272]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "4"
+
+[node name="Button5" type="Button" parent="Menu/VBoxContainer/fases" unique_id=754210517]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "5"
+
+[node name="info" type="Label" parent="Menu/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 9
+text = "Pegue as chaves para liberar a próxima fase"
+horizontal_alignment = 1
+
+[node name="apagar" type="Button" parent="Menu"]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 152.0
+offset_right = 312.0
+offset_bottom = 176.0
+theme_override_font_sizes/font_size = 8
+text = "Apagar progresso"
+
+[node name="voltar" type="Button" parent="Menu" unique_id=150515926]
+custom_maximum_size = Vector2(64, 24)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 152.0
+offset_right = 56.0
+offset_bottom = 176.0
+theme_override_fonts/font = SubResource("SystemFont_uscvu")
+theme_override_font_sizes/font_size = 10
+text = "Voltar
+"
+
+[connection signal="pressed" from="Menu/VBoxContainer/fases/1" to="Menu" method="_on_1_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/fases/Button2" to="Menu" method="_on_button_2_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/fases/Button3" to="Menu" method="_on_button_3_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/fases/Button4" to="Menu" method="_on_button_4_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/fases/Button5" to="Menu" method="_on_button_5_pressed"]
+[connection signal="pressed" from="Menu/apagar" to="Menu" method="_on_apagar_pressed"]
+[connection signal="pressed" from="Menu/voltar" to="Menu" method="_on_voltar_pressed"]

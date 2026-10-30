@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://c8qy4m8k3frog"]
+
+[ext_resource type="Script" uid="uid://b0ocvvctmkggb" path="res://scrips/frog.gd" id="1_frog_script"]
+[ext_resource type="Texture2D" uid="uid://cxtf4se4ihx74" path="res://assets/characters/frog/Spritesheets/frog-idle.png" id="2_idle_tex"]
+[ext_resource type="Texture2D" uid="uid://ismjoc37e8w4" path="res://assets/characters/frog/Spritesheets/frog-jump.png" id="3_jump_tex"]
+[ext_resource type="Texture2D" uid="uid://blnvfhq4lcw6m" path="res://assets/misc/sunnyland_FX/Sprites/enemy-death/enemy-death-1.png" id="4_death_1"]
+[ext_resource type="Texture2D" uid="uid://d1wpv0rdqo7qg" path="res://assets/misc/sunnyland_FX/Sprites/enemy-death/enemy-death-2.png" id="5_death_2"]
+[ext_resource type="Texture2D" uid="uid://c5qltmckitpv4" path="res://assets/misc/sunnyland_FX/Sprites/enemy-death/enemy-death-3.png" id="6_death_3"]
+[ext_resource type="Texture2D" uid="uid://c3rkltk50y1y2" path="res://assets/misc/sunnyland_FX/Sprites/enemy-death/enemy-death-4.png" id="7_death_4"]
+[ext_resource type="Texture2D" uid="uid://rld2hc86ef00" path="res://assets/misc/sunnyland_FX/Sprites/enemy-death/enemy-death-5.png" id="8_death_5"]
+[ext_resource type="Texture2D" uid="uid://b6hefsma61s6w" path="res://assets/misc/sunnyland_FX/Sprites/enemy-death/enemy-death-6.png" id="9_death_6"]
+[ext_resource type="PackedScene" uid="uid://cokx0y1k8xvf3" path="res://prefabs/hit_box.tscn" id="10_hitbox"]
+[ext_resource type="PackedScene" uid="uid://3lalgjnymoon" path="res://prefabs/hurt_box.tscn" id="11_hurtbox"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_frog_body"]
+size = Vector2(18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fall"]
+atlas = ExtResource("3_jump_tex")
+region = Rect2(70, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle_1"]
+atlas = ExtResource("2_idle_tex")
+region = Rect2(0, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle_2"]
+atlas = ExtResource("2_idle_tex")
+region = Rect2(35, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle_3"]
+atlas = ExtResource("2_idle_tex")
+region = Rect2(70, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle_4"]
+atlas = ExtResource("2_idle_tex")
+region = Rect2(105, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jump"]
+atlas = ExtResource("3_jump_tex")
+region = Rect2(35, 0, 35, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_frog"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_death_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_death_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_death_3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_death_4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_death_5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_death_6")
+}],
+"loop": 0,
+"name": &"death",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fall")
+}],
+"loop": 1,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle_4")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jump")
+}],
+"loop": 1,
+"name": &"jump",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_frog_hit"]
+size = Vector2(20, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_frog_hurt"]
+size = Vector2(16, 6)
+
+[node name="Frog" type="CharacterBody2D" unique_id=343805045 groups=["inimigos"]]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_frog_script")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=744019267]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_frog_body")
+
+[node name="Anim" type="AnimatedSprite2D" parent="." unique_id=1314014998]
+sprite_frames = SubResource("SpriteFrames_frog")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Timer" type="Timer" parent="." unique_id=67719246]
+wait_time = 2.0
+one_shot = true
+
+[node name="FloorDetector" type="RayCast2D" parent="." unique_id=1963505606]
+position = Vector2(-14, 10)
+target_position = Vector2(0, 15)
+
+[node name="HitBox" parent="." unique_id=1739101027 instance=ExtResource("10_hitbox")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=2030254673]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_frog_hit")
+debug_color = Color(0.329412, 0.615686, 0.294118, 0.419608)
+
+[node name="HurtBox" parent="." unique_id=2111218862 instance=ExtResource("11_hurtbox")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=768428127]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_frog_hurt")
+debug_color = Color(0.992157, 0.0941176, 0, 0.419608)

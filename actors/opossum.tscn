@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://eagbkcflne0j"]
+
+[ext_resource type="Texture2D" uid="uid://8ad4c7fmn1rk" path="res://assets/characters/opossum/spritesheet.png" id="1_xh06b"]
+[ext_resource type="Script" uid="uid://crs50u38mum0t" path="res://scrips/opossum.gd" id="1_xtd65"]
+[ext_resource type="Texture2D" uid="uid://clte8kgeylm22" path="res://assets/characters/opossum/opossum-hurt.png" id="2_505en"]
+[ext_resource type="PackedScene" uid="uid://cokx0y1k8xvf3" path="res://prefabs/hit_box.tscn" id="4_0bvvf"]
+[ext_resource type="PackedScene" uid="uid://3lalgjnymoon" path="res://prefabs/hurt_box.tscn" id="5_jul4j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eow3j"]
+size = Vector2(24, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rluyb"]
+atlas = ExtResource("1_xh06b")
+region = Rect2(0, 0, 36, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7nl88"]
+atlas = ExtResource("1_xh06b")
+region = Rect2(36, 0, 36, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6aug"]
+atlas = ExtResource("1_xh06b")
+region = Rect2(72, 0, 36, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vngho"]
+atlas = ExtResource("1_xh06b")
+region = Rect2(108, 0, 36, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drhde"]
+atlas = ExtResource("1_xh06b")
+region = Rect2(144, 0, 36, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbfyy"]
+atlas = ExtResource("1_xh06b")
+region = Rect2(180, 0, 36, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l6pba"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_505en")
+}],
+"loop": 0,
+"name": &"hurt",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rluyb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7nl88")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v6aug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vngho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drhde")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbfyy")
+}],
+"loop": 1,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ifeun"]
+size = Vector2(28, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0bvvf"]
+size = Vector2(24, 6)
+
+[node name="Opossum" type="CharacterBody2D" unique_id=847920693 groups=["inimigos"]]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_xtd65")
+patrol_distance = 200.0
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=792189936]
+position = Vector2(0, 5.5)
+shape = SubResource("RectangleShape2D_eow3j")
+
+[node name="Anim" type="AnimatedSprite2D" parent="." unique_id=1136222140]
+sprite_frames = SubResource("SpriteFrames_l6pba")
+animation = &"hurt"
+autoplay = "move"
+
+[node name="HitBox" parent="." unique_id=397854952 instance=ExtResource("4_0bvvf")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=2109882687]
+position = Vector2(0, 5.5)
+shape = SubResource("RectangleShape2D_ifeun")
+debug_color = Color(0.32941177, 0.6156863, 0.29411766, 0.41960785)
+
+[node name="HurtBox" parent="." unique_id=639539518 instance=ExtResource("5_jul4j")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1862033341]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_0bvvf")
+debug_color = Color(0.99215686, 0.09411765, 0, 0.41960785)

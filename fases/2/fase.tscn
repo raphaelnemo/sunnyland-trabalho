@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dke0u4ee6vi68"]
+
+[ext_resource type="Script" path="res://scripts/construtor_fase.gd" id="1_construtor"]
+
+[node name="Fase2" type="Node2D"]
+script = ExtResource("1_construtor")
+idFase = 2

@@ -1,0 +1,42 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scrips/vida.gd" id="1_vida"]
+[ext_resource type="Texture2D" path="res://assets/ui/vida.png" id="2_vida_png"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bg"]
+
+[node name="node_jogador_ui" type="Node" groups=["controlador_vida"]]
+script = ExtResource("1_vida")
+
+[node name="Ui" type="CanvasLayer" parent="."]
+
+[node name="vida" type="Panel" parent="Ui"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 68.0
+offset_bottom = 28.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_bg")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Ui/vida"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+
+[node name="ponto1" type="TextureRect" parent="Ui/vida/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_vida_png")
+stretch_mode = 5
+
+[node name="ponto2" type="TextureRect" parent="Ui/vida/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_vida_png")
+stretch_mode = 5
+
+[node name="ponto3" type="TextureRect" parent="Ui/vida/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_vida_png")
+stretch_mode = 5

@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://bfbl6pq75y8ro"]
+
+[ext_resource type="Texture2D" uid="uid://dtbktg20wfduy" path="res://assets/misc/sunnyland_items/cherry.png" id="1_3as2o"]
+[ext_resource type="PackedScene" uid="uid://disk7ps6cq7vh" path="res://prefabs/item_base.tscn" id="1_6xfom"]
+[ext_resource type="Script" path="res://scrips/cherry.gd" id="2_c7scg"]
+[ext_resource type="Texture2D" uid="uid://cspfrfrxiw62q" path="res://assets/misc/sunnyland_FX/Sprites/item-feedback/item-feedback-1.png" id="2_pcjm0"]
+[ext_resource type="Texture2D" uid="uid://dvfrnsx012i3t" path="res://assets/misc/sunnyland_FX/Sprites/item-feedback/item-feedback-2.png" id="3_08ydo"]
+[ext_resource type="Texture2D" uid="uid://b0nmwadj0ju8h" path="res://assets/misc/sunnyland_FX/Sprites/item-feedback/item-feedback-3.png" id="4_xks7x"]
+[ext_resource type="Texture2D" uid="uid://063bofii2qv4" path="res://assets/misc/sunnyland_FX/Sprites/item-feedback/item-feedback-4.png" id="5_uhmm5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rnkb6"]
+atlas = ExtResource("1_3as2o")
+region = Rect2(0, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykbf0"]
+atlas = ExtResource("1_3as2o")
+region = Rect2(21, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5eoed"]
+atlas = ExtResource("1_3as2o")
+region = Rect2(42, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_li56s"]
+atlas = ExtResource("1_3as2o")
+region = Rect2(63, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35qxd"]
+atlas = ExtResource("1_3as2o")
+region = Rect2(84, 0, 21, 21)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g1obt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_pcjm0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_08ydo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_xks7x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_uhmm5")
+}],
+"loop": 0,
+"name": &"collect",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rnkb6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ykbf0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5eoed")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_li56s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35qxd")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Cherry" unique_id=226625792 groups=["coletaveis"] instance=ExtResource("1_6xfom")]
+script = ExtResource("2_c7scg")
+
+[node name="anim" parent="." index="1" unique_id=355565732]
+sprite_frames = SubResource("SpriteFrames_g1obt")
+animation = &"collect"
+autoplay = "default"

@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://c6diiunn70psp"]
+
+[ext_resource type="Script" uid="uid://bmiugsy7tl5qy" path="res://prefab/coletaveis/cereja/cereja.gd" id="1_g3p1m"]
+[ext_resource type="Texture2D" uid="uid://bffvui46gpwn8" path="res://prefab/coletaveis/cereja/cereja.png" id="2_66ugd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cukwp"]
+atlas = ExtResource("2_66ugd")
+region = Rect2(0, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vo62"]
+atlas = ExtResource("2_66ugd")
+region = Rect2(21, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nlrd4"]
+atlas = ExtResource("2_66ugd")
+region = Rect2(42, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ysfmn"]
+atlas = ExtResource("2_66ugd")
+region = Rect2(63, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxnq5"]
+atlas = ExtResource("2_66ugd")
+region = Rect2(84, 0, 21, 21)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e4q4g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cukwp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vo62")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nlrd4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ysfmn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lxnq5")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l227y"]
+
+[node name="cereja" type="Area2D" unique_id=1964688494]
+collision_mask = 3
+script = ExtResource("1_g3p1m")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1595248234]
+sprite_frames = SubResource("SpriteFrames_e4q4g")
+autoplay = "default"
+frame_progress = 0.558616
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=3536498]
+shape = SubResource("CircleShape2D_l227y")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

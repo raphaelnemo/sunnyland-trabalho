@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://bttsjij0ss8q0"]
+
+[ext_resource type="Script" uid="uid://dmo7lvnex4ic0" path="res://prefab/inimigos/sapo/sapo.gd" id="1_b1t80"]
+[ext_resource type="Texture2D" uid="uid://m7jx3eb2ey3e" path="res://prefab/inimigos/sapo/sapo-jump.png" id="1_wu27m"]
+[ext_resource type="Texture2D" uid="uid://dbaymly2fej4i" path="res://prefab/inimigos/sapo/sapo-idle.png" id="2_dv45u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0kx4j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxog5"]
+size = Vector2(16, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fc7fm"]
+atlas = ExtResource("1_wu27m")
+region = Rect2(70, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aj6lx"]
+atlas = ExtResource("2_dv45u")
+region = Rect2(0, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8du0"]
+atlas = ExtResource("2_dv45u")
+region = Rect2(35, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usifn"]
+atlas = ExtResource("2_dv45u")
+region = Rect2(70, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0wgs"]
+atlas = ExtResource("2_dv45u")
+region = Rect2(105, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ahh3"]
+atlas = ExtResource("1_wu27m")
+region = Rect2(35, 0, 35, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a0eiy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fc7fm")
+}],
+"loop": 1,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aj6lx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d8du0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usifn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0wgs")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ahh3")
+}],
+"loop": 1,
+"name": &"jump",
+"speed": 5.0
+}]
+
+[node name="Area2D" type="Area2D" unique_id=741222602]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=798539546]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_0kx4j")
+
+[node name="Frog" type="CharacterBody2D" parent="." unique_id=1526537207]
+collision_layer = 0
+script = ExtResource("1_b1t80")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Frog" unique_id=85544291]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_yxog5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Frog" unique_id=1595653734]
+sprite_frames = SubResource("SpriteFrames_a0eiy")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Timer" type="Timer" parent="Frog" unique_id=44911148]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Frog/Timer" to="Frog" method="_on_timer_timeout"]

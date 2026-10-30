@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://hvw2tjk7rxpp"]
+
+[ext_resource type="Script" uid="uid://byl58agpdsfmx" path="res://prefab/inimigos/gamba/gamba.gd" id="1_pg588"]
+[ext_resource type="Texture2D" uid="uid://b3qsnu86qjb8v" path="res://prefab/inimigos/gamba/gamba.png" id="2_a2s65"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfm4k"]
+atlas = ExtResource("2_a2s65")
+region = Rect2(0, 0, 36, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ubpe6"]
+atlas = ExtResource("2_a2s65")
+region = Rect2(36, 0, 36, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6e7v"]
+atlas = ExtResource("2_a2s65")
+region = Rect2(72, 0, 36, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68pff"]
+atlas = ExtResource("2_a2s65")
+region = Rect2(108, 0, 36, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63hl0"]
+atlas = ExtResource("2_a2s65")
+region = Rect2(144, 0, 36, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4d4c6"]
+atlas = ExtResource("2_a2s65")
+region = Rect2(180, 0, 36, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fblae"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jfm4k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ubpe6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6e7v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_68pff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63hl0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4d4c6")
+}],
+"loop": 1,
+"name": &"new_animation",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bgaj5"]
+size = Vector2(27, 14)
+
+[node name="gamba" type="Area2D" unique_id=1727745014]
+position = Vector2(3, -13)
+script = ExtResource("1_pg588")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1602900348]
+sprite_frames = SubResource("SpriteFrames_fblae")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.633067
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=305629253]
+position = Vector2(-4, 4)
+shape = SubResource("RectangleShape2D_bgaj5")
+
+[node name="Timer" type="Timer" parent="." unique_id=1702301822]
+wait_time = 2.5
+autostart = true
+
+[node name="ReferenceRect" type="ReferenceRect" parent="." unique_id=1909139432]
+offset_left = -131.0
+offset_top = -4.0
+offset_right = 10.0
+offset_bottom = 12.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

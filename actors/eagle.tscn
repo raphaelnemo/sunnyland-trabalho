@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://df78k2q1eagle"]
+
+[ext_resource type="Script" uid="uid://thq8scj7iaha" path="res://scrips/eagle.gd" id="1_eagle_script"]
+[ext_resource type="Texture2D" uid="uid://dcfr74akkvxob" path="res://assets/characters/eagle/Sprites/attack/eagle-attack-1.png" id="2_fly_1"]
+[ext_resource type="Texture2D" uid="uid://co421cintwlo7" path="res://assets/characters/eagle/Sprites/attack/eagle-attack-2.png" id="3_fly_2"]
+[ext_resource type="Texture2D" uid="uid://c1xcxks0insto" path="res://assets/characters/eagle/Sprites/attack/eagle-attack-3.png" id="4_fly_3"]
+[ext_resource type="Texture2D" uid="uid://b2i2r4vug1q6a" path="res://assets/characters/eagle/Sprites/attack/eagle-attack-4.png" id="5_fly_4"]
+[ext_resource type="Texture2D" uid="uid://blnvfhq4lcw6m" path="res://assets/misc/sunnyland_FX/Sprites/enemy-death/enemy-death-1.png" id="6_death_1"]
+[ext_resource type="Texture2D" uid="uid://d1wpv0rdqo7qg" path="res://assets/misc/sunnyland_FX/Sprites/enemy-death/enemy-death-2.png" id="7_death_2"]
+[ext_resource type="Texture2D" uid="uid://c5qltmckitpv4" path="res://assets/misc/sunnyland_FX/Sprites/enemy-death/enemy-death-3.png" id="8_death_3"]
+[ext_resource type="Texture2D" uid="uid://c3rkltk50y1y2" path="res://assets/misc/sunnyland_FX/Sprites/enemy-death/enemy-death-4.png" id="9_death_4"]
+[ext_resource type="Texture2D" uid="uid://rld2hc86ef00" path="res://assets/misc/sunnyland_FX/Sprites/enemy-death/enemy-death-5.png" id="10_death_5"]
+[ext_resource type="Texture2D" uid="uid://b6hefsma61s6w" path="res://assets/misc/sunnyland_FX/Sprites/enemy-death/enemy-death-6.png" id="11_death_6"]
+[ext_resource type="PackedScene" uid="uid://cokx0y1k8xvf3" path="res://prefabs/hit_box.tscn" id="12_hitbox"]
+[ext_resource type="PackedScene" uid="uid://3lalgjnymoon" path="res://prefabs/hurt_box.tscn" id="13_hurtbox"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_body"]
+radius = 12.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eagle"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_death_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_death_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_death_3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_death_4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_death_5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_death_6")
+}],
+"loop": 0,
+"name": &"death",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fly_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_fly_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_fly_3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_fly_4")
+}],
+"loop": 1,
+"name": &"fly",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hit"]
+size = Vector2(28, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
+size = Vector2(22, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_detector"]
+radius = 64.0
+
+[node name="Eagle" type="CharacterBody2D" unique_id=134214804 groups=["inimigos"]]
+collision_layer = 4
+motion_mode = 1
+script = ExtResource("1_eagle_script")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1529761562]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_body")
+
+[node name="Anim" type="AnimatedSprite2D" parent="." unique_id=1300156383]
+sprite_frames = SubResource("SpriteFrames_eagle")
+animation = &"fly"
+autoplay = "fly"
+
+[node name="HitBox" parent="." unique_id=749757464 instance=ExtResource("12_hitbox")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=2062275683]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_hit")
+debug_color = Color(0.329412, 0.615686, 0.294118, 0.419608)
+
+[node name="HurtBox" parent="." unique_id=803116335 instance=ExtResource("13_hurtbox")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1818267159]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_hurt")
+debug_color = Color(0.992157, 0.0941176, 0, 0.419608)
+
+[node name="PlayerDetector" type="Area2D" parent="." unique_id=1299623285]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" unique_id=48200244]
+position = Vector2(0, 40)
+shape = SubResource("CircleShape2D_detector")
+debug_color = Color(0.686275, 0.498039, 0, 0.156863)

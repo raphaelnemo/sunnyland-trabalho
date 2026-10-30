@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://cp452d6a38bn1"]
+
+[ext_resource type="Texture2D" uid="uid://cspfrfrxiw62q" path="res://assets/misc/sunnyland_FX/Sprites/item-feedback/item-feedback-1.png" id="1_c0jft"]
+[ext_resource type="PackedScene" uid="uid://disk7ps6cq7vh" path="res://prefabs/item_base.tscn" id="1_n0te3"]
+[ext_resource type="Script" path="res://scrips/gem.gd" id="2_gem_gd"]
+[ext_resource type="Texture2D" uid="uid://dvfrnsx012i3t" path="res://assets/misc/sunnyland_FX/Sprites/item-feedback/item-feedback-2.png" id="2_n0te3"]
+[ext_resource type="Texture2D" uid="uid://b0nmwadj0ju8h" path="res://assets/misc/sunnyland_FX/Sprites/item-feedback/item-feedback-3.png" id="3_nb0r5"]
+[ext_resource type="Texture2D" uid="uid://063bofii2qv4" path="res://assets/misc/sunnyland_FX/Sprites/item-feedback/item-feedback-4.png" id="4_titaq"]
+[ext_resource type="Texture2D" uid="uid://d0v2cdkq2xlm6" path="res://assets/misc/sunnyland_items/gem.png" id="5_n0rjs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nb0r5"]
+atlas = ExtResource("5_n0rjs")
+region = Rect2(0, 0, 15, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_titaq"]
+atlas = ExtResource("5_n0rjs")
+region = Rect2(15, 0, 15, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0rjs"]
+atlas = ExtResource("5_n0rjs")
+region = Rect2(30, 0, 15, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjpvx"]
+atlas = ExtResource("5_n0rjs")
+region = Rect2(45, 0, 15, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsjsh"]
+atlas = ExtResource("5_n0rjs")
+region = Rect2(60, 0, 15, 13)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_li56s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_c0jft")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_n0te3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nb0r5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_titaq")
+}],
+"loop": 0,
+"name": &"collect",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nb0r5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_titaq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0rjs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjpvx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jsjsh")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Gem" unique_id=226625792 groups=["coletaveis", "diamantes"] instance=ExtResource("1_n0te3")]
+script = ExtResource("2_gem_gd")
+score_value = 5
+
+[node name="anim" parent="." index="1" unique_id=355565732]
+sprite_frames = SubResource("SpriteFrames_li56s")
+autoplay = "default"

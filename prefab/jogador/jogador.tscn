@@ -1,0 +1,176 @@
+[gd_scene format=3 uid="uid://20a05jgwlt4p"]
+
+[ext_resource type="Script" uid="uid://v6upq5rao843" path="res://prefab/jogador/vida.gd" id="1_awy6c"]
+[ext_resource type="Script" uid="uid://bjlwrl0n5kfen" path="res://prefab/jogador/jogador.gd" id="1_o11ko"]
+[ext_resource type="Texture2D" uid="uid://ceshs1imbmmkc" path="res://prefab/jogador/jogador.png" id="2_6laf6"]
+[ext_resource type="Texture2D" uid="uid://1scu5d16grgr" path="res://prefab/jogador/vida.png" id="4_awy6c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bgaj5"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gh5aj"]
+atlas = ExtResource("2_6laf6")
+region = Rect2(0, 0, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cykur"]
+atlas = ExtResource("2_6laf6")
+region = Rect2(33, 0, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhylf"]
+atlas = ExtResource("2_6laf6")
+region = Rect2(66, 0, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vohs2"]
+atlas = ExtResource("2_6laf6")
+region = Rect2(99, 0, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rklwh"]
+atlas = ExtResource("2_6laf6")
+region = Rect2(33, 160, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yoyf1"]
+atlas = ExtResource("2_6laf6")
+region = Rect2(0, 32, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmuh6"]
+atlas = ExtResource("2_6laf6")
+region = Rect2(33, 32, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ty16k"]
+atlas = ExtResource("2_6laf6")
+region = Rect2(66, 32, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1k2bi"]
+atlas = ExtResource("2_6laf6")
+region = Rect2(99, 32, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i32cl"]
+atlas = ExtResource("2_6laf6")
+region = Rect2(132, 32, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wyp7x"]
+atlas = ExtResource("2_6laf6")
+region = Rect2(165, 32, 33, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0r8a8"]
+atlas = ExtResource("2_6laf6")
+region = Rect2(0, 160, 33, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oox5t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gh5aj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cykur")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vhylf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vohs2")
+}],
+"loop": 1,
+"name": &"ancioso",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rklwh")
+}],
+"loop": 1,
+"name": &"caindo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yoyf1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hmuh6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ty16k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1k2bi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i32cl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wyp7x")
+}],
+"loop": 1,
+"name": &"correndo",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0r8a8")
+}],
+"loop": 1,
+"name": &"pulando",
+"speed": 5.0
+}]
+
+[node name="Node" type="Node" unique_id=1472519340 groups=["jogador"]]
+script = ExtResource("1_awy6c")
+
+[node name="jogador" type="CharacterBody2D" parent="." unique_id=919842630 groups=["jogador"]]
+position = Vector2(-8, 8)
+script = ExtResource("1_o11ko")
+
+[node name="Camera2D" type="Camera2D" parent="jogador" unique_id=1029244272]
+position = Vector2(8, -192)
+anchor_mode = 0
+limit_left = 0
+limit_top = -256
+limit_right = 1280
+limit_bottom = 0
+limit_smoothed = true
+drag_vertical_enabled = true
+drag_bottom_margin = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="jogador" unique_id=797489401]
+position = Vector2(160, -96)
+shape = SubResource("RectangleShape2D_bgaj5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="jogador" unique_id=1199657432]
+position = Vector2(160, -104)
+sprite_frames = SubResource("SpriteFrames_oox5t")
+animation = &"ancioso"
+autoplay = "ancioso"
+
+[node name="Ui" type="CanvasLayer" parent="." unique_id=754263347]
+
+[node name="vida" type="Panel" parent="Ui" unique_id=1527673468]
+top_level = true
+offset_right = 72.0
+offset_bottom = 24.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Ui/vida" unique_id=1189191990]
+top_level = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.175
+anchor_bottom = 0.133
+offset_left = 8.0
+offset_right = 8.0
+offset_bottom = 0.059999466
+
+[node name="ponto1" type="TextureRect" parent="Ui/vida/HBoxContainer" unique_id=1736790477]
+layout_mode = 2
+texture = ExtResource("4_awy6c")
+stretch_mode = 5
+
+[node name="ponto2" type="TextureRect" parent="Ui/vida/HBoxContainer" unique_id=1335451021]
+layout_mode = 2
+texture = ExtResource("4_awy6c")
+stretch_mode = 5
+
+[node name="ponto3" type="TextureRect" parent="Ui/vida/HBoxContainer" unique_id=452262916]
+layout_mode = 2
+texture = ExtResource("4_awy6c")
+stretch_mode = 5

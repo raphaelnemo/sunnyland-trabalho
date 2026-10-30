@@ -1,0 +1,50 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scrips/pontuacao_ui.gd" id="1_pontuacao"]
+[ext_resource type="Texture2D" uid="uid://d0v2cdkq2xlm6" path="res://assets/misc/sunnyland_items/gem.png" id="2_gem_png"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gem_hud"]
+atlas = ExtResource("2_gem_png")
+region = Rect2(0, 0, 15, 13)
+
+[node name="node_pontuacao_ui" type="Node" groups=["controlador_pontos"]]
+script = ExtResource("1_pontuacao")
+
+[node name="Ui" type="CanvasLayer" parent="."]
+
+[node name="pontuacao" type="Panel" parent="Ui"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -70.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 28.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_bg")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Ui/pontuacao"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+theme_override_constants/separation = 4
+
+[node name="LabelPontuacao" type="Label" parent="Ui/pontuacao/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 10
+text = "00/00"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="IconeDiamante" type="TextureRect" parent="Ui/pontuacao/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_gem_hud")
+stretch_mode = 5
